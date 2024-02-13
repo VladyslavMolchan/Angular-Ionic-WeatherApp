@@ -1,16 +1,18 @@
 <ion-app>
+
   <ion-header>
     <ion-toolbar color="primary">
       <ion-title>
-        <div style="display: flex; align-items: center">
+        <div style="display: flex; align-items: center;">
           <div>Погода</div>
-          <div style="margin-left: auto">
+          <div style="margin-left: auto;">
             <ion-img src="./../../assets/icon/sun.svg"></ion-img>
           </div>
         </div>
       </ion-title>
     </ion-toolbar>
   </ion-header>
+
 
   <ion-content class="weather-page">
     <ion-card *ngIf="loading">
@@ -19,55 +21,39 @@
       </ion-card-content>
     </ion-card>
 
+
     <div *ngIf="error" class="error-message">
       <p>Помилка: {{ error }}</p>
     </div>
 
     <ion-card class="weather-card">
       <ion-card-header>
-        <ion-label
-          >Поточна погода місто:
-          <span class="city__color">{{city}}</span></ion-label
-        >
+        <ion-label>Поточна погода місто: <span class="city__color">{{city}}</span></ion-label>
       </ion-card-header>
       <ion-card-content>
         <ion-grid class="weather-grid">
           <ion-row>
-            <ion-col>
+            <ion-col >
               <ion-item class="weather-input">
                 <ion-label position="stacked">Місто</ion-label>
-                <ion-input
-                  type="text"
-                  [(ngModel)]="city"
-                  #cityInput
-                  (keyup.enter)="searchWeather(cityInput)"
-                  maxlength="25"
-                ></ion-input>
+                <ion-input type="text" [(ngModel)]="city" #cityInput (keyup.enter)="searchWeather(cityInput)" maxlength="25"></ion-input>
               </ion-item>
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col size-md="6" size-lg="4">
-              <ion-button expand="full" (click)="searchWeather(cityInput)"
-                >Пошук погоди</ion-button
-              >
+              <ion-button expand="full" (click)="searchWeather(cityInput)">Пошук погоди</ion-button>
             </ion-col>
             <ion-col size-md="6" size-lg="4">
-              <ion-button expand="full" (click)="reloadWeather()"
-                >Оновити погоду</ion-button
-              >
+              <ion-button expand="full"  (click)="reloadWeather()">Оновити погоду</ion-button>
             </ion-col>
           </ion-row>
         </ion-grid>
 
-        <div *ngIf="weatherData" style="text-align: center">
+        <div *ngIf="weatherData" style="text-align: center;">
           <p class="city__color">{{weatherData.name}}</p>
           <p>Країна: {{ weatherData.sys.country }}</p>
-          <p
-            [ngStyle]="{'color': weatherData.main.temp > -1 ? 'rgba(0, 220, 0, 1)' : 'rgb(220, 20, 60)'}"
-          >
-            Температура: {{ weatherData.main.temp }}°C
-          </p>
+          <p [ngStyle]="{'color': weatherData.main.temp > -1 ? 'rgba(0, 220, 0, 1)' : 'rgb(220, 20, 60)'}">Температура: {{ weatherData.main.temp }}°C</p>
           <p>Відчувається як: {{ weatherData.main.feels_like }}°C</p>
           <p>Мінімальна температура: {{ weatherData.main.temp_min }}°C</p>
           <p>Максимальна температура: {{ weatherData.main.temp_max }}°C</p>
@@ -78,26 +64,18 @@
           <p>Порив вітру: {{ weatherData.wind.gust }} м/с</p>
           <p>Хмарність: {{ weatherData.clouds.all }}%</p>
           <p>Видимість: {{ weatherData.visibility }} м</p>
-          <div
-            style="display: flex; align-items: center; justify-content: center"
-          >
-            <p style="margin: 0">Опис погоди:</p>
-            <ion-img
-              style="margin-left: 5px"
-              [src]="'https://openweathermap.org/img/wn/' + weatherData.weather[0].icon + '.png'"
-            ></ion-img>
+          <div style="display: flex; align-items: center; justify-content: center;">
+            <p style="margin: 0;">Опис погоди: </p>
+            <ion-img style="margin-left: 5px;" [src]="'https://openweathermap.org/img/wn/' + weatherData.weather[0].icon + '.png'"></ion-img>
           </div>
 
-          <p>
-            Сходження сонця: {{ convertTimestampToTime(weatherData.sys.sunrise)
-            }}
-          </p>
-          <p>
-            Заходження сонця: {{ convertTimestampToTime(weatherData.sys.sunset)
-            }}
-          </p>
+          <p>Сходження сонця: {{ convertTimestampToTime(weatherData.sys.sunrise) }}</p>
+          <p>Заходження сонця: {{ convertTimestampToTime(weatherData.sys.sunset) }}</p>
         </div>
+
       </ion-card-content>
     </ion-card>
   </ion-content>
+
 </ion-app>
+
